@@ -28,7 +28,7 @@ export class AuthenticationError extends ApiError {
 }
 
 // API client setup
-export const createApiClient = (baseURL: string = 'http://localhost:5000'): AxiosInstance => {
+export const createApiClient = (baseURL: string = ''): AxiosInstance => {
   const api = axios.create({
     baseURL,
     headers: {
@@ -64,15 +64,15 @@ export const createApiClient = (baseURL: string = 'http://localhost:5000'): Axio
 
       const { response } = error;
       const status = response.status;
-      const data = response.data || {};
+      const data = response.data as Record<string, any> || {};
       
       let errorMessage = "An unexpected error occurred";
       
       // Try to extract specific error message from the API response
       if (data && typeof data === 'object') {
-        if (data.message) {
+        if ('message' in data && typeof data.message === 'string') {
           errorMessage = data.message;
-        } else if (data.error) {
+        } else if ('error' in data && typeof data.error === 'string') {
           errorMessage = data.error;
         }
       }
