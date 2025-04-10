@@ -1,40 +1,96 @@
-# Login Page
+# Login Page Application
 
-A fully functional React login page application built with TypeScript.
+A full-stack application with a React TypeScript frontend and Node.js TypeScript backend.
 
-## Setup
+## Project Structure
 
-1. Install dependencies:
-```bash
-npm install
+The project is organized into two main directories:
+
+```
+/loginpage
+  ├── frontend/        # React frontend application
+  └── server/          # Node.js backend application
 ```
 
-2. Start the development server:
-```bash
-npm run dev
+### Frontend Structure
+
+```
+/frontend
+  ├── public/          # Static files
+  ├── src/             # Source code
+  │   ├── components/  # Reusable components
+  │   │   └── auth/    # Authentication components (LoginPage)
+  │   ├── contexts/    # React context providers (AuthContext)
+  │   ├── hooks/       # Custom React hooks
+  │   ├── pages/       # Page components
+  │   ├── services/    # API service functions
+  │   ├── utils/       # Utility functions
+  │   ├── App.tsx      # Main App component
+  │   └── index.tsx    # Entry point
+  ├── package.json     # Dependencies
+  └── tsconfig.json    # TypeScript configuration
+```
+
+### Backend Structure
+
+```
+/server
+  ├── prisma/          # Database schema and migrations
+  ├── src/             # Source code
+  │   ├── controllers/ # Business logic
+  │   ├── middleware/  # Custom middleware
+  │   ├── routes/      # API routes
+  │   ├── utils/       # Utility functions
+  │   └── index.ts     # Entry point
+  ├── .env             # Environment variables
+  └── package.json     # Dependencies
 ```
 
 ## Features
 
-- Modern UI design for login form
-- TypeScript for type safety
-- Responsive design for all device sizes
-- Avatar components showing connected users
-- Google sign-in option
+- User authentication (login/register)
+- Form validation
+- Error handling
+- Protected routes
+- JWT authentication
 
-## Project Structure
+## Running the Application
 
-- `src/components/auth/` - Contains the login page components
-  - `LoginPage.tsx` - Main login page component
-  - `Avatar.tsx` - Component for user avatars
-  - `GoogleIcon.tsx` - Google icon SVG component
-- `src/App.tsx` - Main application component
-- CSS files for styling
-
-## Notes
-
-If you encounter any TypeScript errors related to missing types, make sure to install the required dependencies:
+### Backend
 
 ```bash
-npm install @types/react @types/react-dom --save-dev
+cd server
+npm install
+npm run dev
 ```
+
+The server will run on http://localhost:5000
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+The frontend will run on http://localhost:3000
+
+## Error Handling
+
+The application implements robust error handling:
+
+1. **Frontend Form Validation**:
+   - Input validation for required fields
+   - Email format validation
+   - Password strength requirements
+
+2. **API Error Handling**:
+   - Network errors detection
+   - HTTP status code-based error messages
+   - User-friendly error messages
+
+3. **Authentication Errors**:
+   - Invalid credentials handling
+   - Expired tokens handling
+   - Authorization errors

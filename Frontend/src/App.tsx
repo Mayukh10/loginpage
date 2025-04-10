@@ -1,19 +1,62 @@
-import { useState } from 'react'
-import './App.css'
-import LoginPage from './components/auth/LoginPage'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+import Login from './pages/Login';
+import './App.css';
 
-function App() {
-  const handleLogin = (uid: string, password: string) => {
-    console.log('Login attempted with:', { uid, password });
-    // Here you would typically make an API call to authenticate the user
-    alert(`Login attempted with UID: ${uid}`);
-  };
+// Protected route component
+const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { isAuthenticated, isLoading } = useAuth();
+
+  if (isLoading) {
+    return <div className="loading">Loading...</div>;
+  }
+
+  return isAuthenticated ? <>{children}</> : <Navigate to="/login" />;
+};
+
+// Placeholder Dashboard component
+const Dashboard: React.FC = () => {
+  const { user, logout } = useAuth();
 
   return (
-    <div className="app">
-      <LoginPage onLogin={handleLogin} />
+    <div className="dashboard">
+      <h1>Dashboard</h1>
+      <p>Welcome, {user?.email}!</p>
+      <button onClick={logout} className="logout-button">Logout</button>
     </div>
-  )
-}
+  );
+};
 
-export default App
+// App component with router
+const AppContent: React.FC = () => {
+  return (
+    <Router>
+      <div className="app">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route 
+            path="/dashboard" 
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route path="/" element={<Navigate to="/login" />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+};
+
+// Root component with providers
+const App: React.FC = () => {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
+  );
+};
+
+export default App;
