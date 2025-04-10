@@ -95,7 +95,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                 className={`login-input ${errors.uid ? 'input-error' : ''}`}
                 disabled={isLoading}
               />
-              {errors.uid && <div className="error-hint">{errors.uid}</div>}
+              {errors.uid && <div className="error-hint">⚠️ {errors.uid}</div>}
             </div>
             
             <div className="form-group">
@@ -107,7 +107,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                 className={`login-input ${errors.password ? 'input-error' : ''}`}
                 disabled={isLoading}
               />
-              {errors.password && <div className="error-hint">{errors.password}</div>}
+              {errors.password && <div className="error-hint">⚠️ {errors.password}</div>}
             </div>
             
             <button 

@@ -64,15 +64,15 @@ export const createApiClient = (baseURL: string = ''): AxiosInstance => {
 
       const { response } = error;
       const status = response.status;
-      const data = response.data as Record<string, any> || {};
+      const data = response.data || {};
       
       let errorMessage = "An unexpected error occurred";
       
       // Try to extract specific error message from the API response
       if (data && typeof data === 'object') {
-        if ('message' in data && typeof data.message === 'string') {
+        if (data.message) {
           errorMessage = data.message;
-        } else if ('error' in data && typeof data.error === 'string') {
+        } else if (data.error) {
           errorMessage = data.error;
         }
       }
