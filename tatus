@@ -1,0 +1,5 @@
+[33mcommit 182e7180b658e79232bf36b52718ed195b3c8b6b[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Mayukh10 <90505949+Mayukh10@users.noreply.github.com>
+Date:   Thu Apr 10 16:29:47 2025 +0530
+
+    Fix validation error display in login form

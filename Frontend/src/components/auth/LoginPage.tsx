@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './LoginPage.css';
 
+// LoginPage component for handling user authentication
 interface LoginPageProps {
   onLogin: (uid: string, password: string) => Promise<void>;
 }
