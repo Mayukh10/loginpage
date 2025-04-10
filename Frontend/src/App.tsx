@@ -22,7 +22,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="dashboard">
       <h1>Dashboard</h1>
-      <p>Welcome, {user?.email}!</p>
+      <p>Welcome, {user?.email || 'User'}!</p>
       <button onClick={logout} className="logout-button">Logout</button>
     </div>
   );
